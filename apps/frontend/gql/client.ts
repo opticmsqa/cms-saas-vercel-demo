@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 type GraphQLClientRequestHeaders = RequestOptions['requestHeaders'];
 export const LinkDataFragmentDoc = gql`
     fragment LinkData on ContentUrl {
+  type
   base
   default
 }
@@ -84,31 +85,23 @@ export const ArticleListElementDataFragmentDoc = gql`
   topics
 }
     `;
-export const SimpleBlockPropertyDataFragmentDoc = gql`
-    fragment SimpleBlockPropertyData on SimpleBlockProperty {
-  StringProp
-}
-    `;
-export const BlockTypeBlockSimpleBlockDataFragmentDoc = gql`
-    fragment BlockTypeBlockSimpleBlockData on BlockTypeBlockSimpleBlock {
-  BlockSimpleBlock {
-    ...SimpleBlockPropertyData
+export const ButtonBlockDataFragmentDoc = gql`
+    fragment ButtonBlockData on ButtonBlock {
+  children: ButtonText
+  url: ButtonUrl {
+    ...LinkData
   }
+  className: ButtonClass
+  buttonType: ButtonType
+  buttonVariant: ButtonVariant
 }
     `;
-export const BlockTypeChoiceDropDownListDataFragmentDoc = gql`
-    fragment BlockTypeChoiceDropDownListData on BlockTypeChoiceDropDownList {
-  ChoiceDropDownList
-}
-    `;
-export const BlockTypeChoiceSelectListDataFragmentDoc = gql`
-    fragment BlockTypeChoiceSelectListData on BlockTypeChoiceSelectList {
-  ChoiceSelectList
-}
-    `;
-export const BlockTypeChoiceSelectedNotSelectedDataFragmentDoc = gql`
-    fragment BlockTypeChoiceSelectedNotSelectedData on BlockTypeChoiceSelectedNotSelected {
-  ChoiceSelectedNotSelected
+export const CTAElementDataFragmentDoc = gql`
+    fragment CTAElementData on CTAElement {
+  cta_text: Text
+  cta_link: Link {
+    ...LinkData
+  }
 }
     `;
 export const IContentListItemFragmentDoc = gql`
@@ -134,200 +127,6 @@ export const VideoMediaComponentDataFragmentDoc = gql`
       default
     }
     name: displayName
-  }
-}
-    `;
-export const BlockTypeContentContentReferenceDataFragmentDoc = gql`
-    fragment BlockTypeContentContentReferenceData on BlockTypeContentContentReference {
-  ContentContentReference {
-    ...ReferenceData
-  }
-}
-    `;
-export const BlockTypeDateTimeDataFragmentDoc = gql`
-    fragment BlockTypeDateTimeData on BlockTypeDateTime {
-  DateTime
-}
-    `;
-export const BlockTypeGuidDataFragmentDoc = gql`
-    fragment BlockTypeGuidData on BlockTypeGuid {
-  Guid
-}
-    `;
-export const LinkItemDataFragmentDoc = gql`
-    fragment LinkItemData on Link {
-  title
-  text
-  target
-  url {
-    ...LinkData
-  }
-}
-    `;
-export const BlockTypeLinkLinkCollectionDataFragmentDoc = gql`
-    fragment BlockTypeLinkLinkCollectionData on BlockTypeLinkLinkCollection {
-  LinkLinkCollection {
-    ...LinkItemData
-  }
-}
-    `;
-export const BlockTypeLinkLinkItemDataFragmentDoc = gql`
-    fragment BlockTypeLinkLinkItemData on BlockTypeLinkLinkItem {
-  LinkLinkItem {
-    ...LinkItemData
-  }
-}
-    `;
-export const BlockTypeLinkUrlToDocumentDataFragmentDoc = gql`
-    fragment BlockTypeLinkUrlToDocumentData on BlockTypeLinkUrlToDocument {
-  LinkUrlToDocument {
-    ...LinkData
-  }
-}
-    `;
-export const BlockTypeLinkUrlToImageDataFragmentDoc = gql`
-    fragment BlockTypeLinkUrlToImageData on BlockTypeLinkUrlToImage {
-  LinkUrlToImage {
-    ...LinkData
-  }
-}
-    `;
-export const BlockTypeLinkUrlToPageDataFragmentDoc = gql`
-    fragment BlockTypeLinkUrlToPageData on BlockTypeLinkUrlToPage {
-  LinkUrlToPage {
-    ...LinkData
-  }
-}
-    `;
-export const BlockTypeListBlockSimpleBlockDataFragmentDoc = gql`
-    fragment BlockTypeListBlockSimpleBlockData on BlockTypeListBlockSimpleBlock {
-  ListBlockSimpleBlock {
-    ...SimpleBlockPropertyData
-  }
-}
-    `;
-export const BlockTypeListChoiceSelectedNotSelectedDataFragmentDoc = gql`
-    fragment BlockTypeListChoiceSelectedNotSelectedData on BlockTypeListChoiceSelectedNotSelected {
-  ListChoiceSelectedNotSelected
-}
-    `;
-export const BlockTypeListContentContentReferenceDataFragmentDoc = gql`
-    fragment BlockTypeListContentContentReferenceData on BlockTypeListContentContentReference {
-  ListContentContentReference {
-    ...ReferenceData
-  }
-}
-    `;
-export const BlockTypeListDateTimeDataFragmentDoc = gql`
-    fragment BlockTypeListDateTimeData on BlockTypeListDateTime {
-  ListDateTime
-}
-    `;
-export const BlockTypeListGuidDataFragmentDoc = gql`
-    fragment BlockTypeListGuidData on BlockTypeListGuid {
-  ListGuid
-}
-    `;
-export const BlockTypeListLinkLinkItemDataFragmentDoc = gql`
-    fragment BlockTypeListLinkLinkItemData on BlockTypeListLinkLinkItem {
-  ListLinkLinkItem {
-    ...LinkItemData
-  }
-}
-    `;
-export const BlockTypeListLinkUrlToDocumentDataFragmentDoc = gql`
-    fragment BlockTypeListLinkUrlToDocumentData on BlockTypeListLinkUrlToDocument {
-  ListLinkUrlToDocument {
-    __typename
-  }
-}
-    `;
-export const BlockTypeListLinkUrlToImageDataFragmentDoc = gql`
-    fragment BlockTypeListLinkUrlToImageData on BlockTypeListLinkUrlToImage {
-  ListLinkUrlToImage {
-    __typename
-  }
-}
-    `;
-export const BlockTypeListLinkUrlToPageDataFragmentDoc = gql`
-    fragment BlockTypeListLinkUrlToPageData on BlockTypeListLinkUrlToPage {
-  ListLinkUrlToPage {
-    __typename
-  }
-}
-    `;
-export const BlockTypeListNumberFloatingPointDataFragmentDoc = gql`
-    fragment BlockTypeListNumberFloatingPointData on BlockTypeListNumberFloatingPoint {
-  ListNumberFloatingPoint
-}
-    `;
-export const BlockTypeListNumberIntegerDataFragmentDoc = gql`
-    fragment BlockTypeListNumberIntegerData on BlockTypeListNumberInteger {
-  ListNumberInteger
-}
-    `;
-export const BlockTypeListTextLongStringDataFragmentDoc = gql`
-    fragment BlockTypeListTextLongStringData on BlockTypeListTextLongString {
-  ListTextLongString
-}
-    `;
-export const BlockTypeListTextStringDataFragmentDoc = gql`
-    fragment BlockTypeListTextStringData on BlockTypeListTextString {
-  ListTextString
-}
-    `;
-export const BlockTypeListTextXHtmlStringDataFragmentDoc = gql`
-    fragment BlockTypeListTextXHtmlStringData on BlockTypeListTextXHtmlString {
-  ListTextXHtmlString {
-    json
-    html
-  }
-}
-    `;
-export const BlockTypeNumberFloatingPointDataFragmentDoc = gql`
-    fragment BlockTypeNumberFloatingPointData on BlockTypeNumberFloatingPoint {
-  NumberFloatingPoint
-}
-    `;
-export const BlockTypeNumberIntegerDataFragmentDoc = gql`
-    fragment BlockTypeNumberIntegerData on BlockTypeNumberInteger {
-  NumberInteger
-}
-    `;
-export const BlockTypeTextLongStringDataFragmentDoc = gql`
-    fragment BlockTypeTextLongStringData on BlockTypeTextLongString {
-  TextLongString
-}
-    `;
-export const BlockTypeTextStringDataFragmentDoc = gql`
-    fragment BlockTypeTextStringData on BlockTypeTextString {
-  TextString
-}
-    `;
-export const BlockTypeTextXHtmlStringDataFragmentDoc = gql`
-    fragment BlockTypeTextXHtmlStringData on BlockTypeTextXHtmlString {
-  TextXHtmlString {
-    json
-    html
-  }
-}
-    `;
-export const ButtonBlockDataFragmentDoc = gql`
-    fragment ButtonBlockData on ButtonBlock {
-  children: ButtonText
-  url: ButtonUrl {
-    ...LinkData
-  }
-  className: ButtonClass
-  buttonType: ButtonType
-  buttonVariant: ButtonVariant
-}
-    `;
-export const CTAElementDataFragmentDoc = gql`
-    fragment CTAElementData on CTAElement {
-  cta_text: Text
-  cta_link: Link {
-    ...LinkData
   }
 }
     `;
@@ -376,6 +175,16 @@ export const ImageElementDataFragmentDoc = gql`
   altText
   imageLink {
     ...ReferenceData
+  }
+}
+    `;
+export const LinkItemDataFragmentDoc = gql`
+    fragment LinkItemData on Link {
+  title
+  text
+  target
+  url {
+    ...LinkData
   }
 }
     `;
@@ -500,11 +309,6 @@ export const RichTextElementDataFragmentDoc = gql`
   }
 }
     `;
-export const SimpleBlockDataFragmentDoc = gql`
-    fragment SimpleBlockData on SimpleBlock {
-  StringProp
-}
-    `;
 export const TestimonialElementDataFragmentDoc = gql`
     fragment TestimonialElementData on TestimonialElement {
   customerName
@@ -559,39 +363,6 @@ export const ContinueReadingComponentDataFragmentDoc = gql`
     ...IContentData
     ...BlockData
     ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
     ...ButtonBlockData
     ...CTAElementData
     ...CarouselBlockData
@@ -608,7 +379,6 @@ export const ContinueReadingComponentDataFragmentDoc = gql`
     ...ParagraphElementData
     ...QuoteBlockData
     ...RichTextElementData
-    ...SimpleBlockData
     ...TestimonialElementData
     ...TextBlockData
     ...VideoElementData
@@ -624,39 +394,6 @@ export const CarouselBlockDataFragmentDoc = gql`
     ...ImageMediaComponentData
     ...VideoMediaComponentData
     ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
     ...ButtonBlockData
     ...CTAElementData
     ...CarouselBlockData
@@ -673,137 +410,6 @@ export const CarouselBlockDataFragmentDoc = gql`
     ...ParagraphElementData
     ...QuoteBlockData
     ...RichTextElementData
-    ...SimpleBlockData
-    ...TestimonialElementData
-    ...TextBlockData
-    ...VideoElementData
-    ...BlankSectionData
-  }
-}
-    `;
-export const BlockTypeContentContentAreaItemDataFragmentDoc = gql`
-    fragment BlockTypeContentContentAreaItemData on BlockTypeContentContentAreaItem {
-  ContentContentAreaItem {
-    ...IContentListItem
-    ...BlockData
-    ...ImageMediaComponentData
-    ...VideoMediaComponentData
-    ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
-    ...ButtonBlockData
-    ...CTAElementData
-    ...CarouselBlockData
-    ...ContentRecsElementData
-    ...ContinueReadingComponentData
-    ...HeadingElementData
-    ...HeroBlockData
-    ...ImageElementData
-    ...LayoutSettingsBlockData
-    ...MegaMenuGroupBlockData
-    ...MenuNavigationBlockData
-    ...OdpEmbedBlockData
-    ...PageSeoSettingsData
-    ...ParagraphElementData
-    ...QuoteBlockData
-    ...RichTextElementData
-    ...SimpleBlockData
-    ...TestimonialElementData
-    ...TextBlockData
-    ...VideoElementData
-    ...BlankSectionData
-  }
-}
-    `;
-export const BlockTypeContentContentAreaDataFragmentDoc = gql`
-    fragment BlockTypeContentContentAreaData on BlockTypeContentContentArea {
-  ContentContentArea {
-    ...IContentListItem
-    ...BlockData
-    ...ImageMediaComponentData
-    ...VideoMediaComponentData
-    ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
-    ...ButtonBlockData
-    ...CTAElementData
-    ...CarouselBlockData
-    ...ContentRecsElementData
-    ...ContinueReadingComponentData
-    ...HeadingElementData
-    ...HeroBlockData
-    ...ImageElementData
-    ...LayoutSettingsBlockData
-    ...MegaMenuGroupBlockData
-    ...MenuNavigationBlockData
-    ...OdpEmbedBlockData
-    ...PageSeoSettingsData
-    ...ParagraphElementData
-    ...QuoteBlockData
-    ...RichTextElementData
-    ...SimpleBlockData
     ...TestimonialElementData
     ...TextBlockData
     ...VideoElementData
@@ -817,39 +423,6 @@ export const CompositionComponentNodeDataFragmentDoc = gql`
     ...BlockData
     ...ElementData
     ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
     ...ButtonBlockData
     ...CTAElementData
     ...CarouselBlockData
@@ -866,7 +439,6 @@ export const CompositionComponentNodeDataFragmentDoc = gql`
     ...ParagraphElementData
     ...QuoteBlockData
     ...RichTextElementData
-    ...SimpleBlockData
     ...TestimonialElementData
     ...TextBlockData
     ...VideoElementData
@@ -890,6 +462,12 @@ export const ExperienceDataFragmentDoc = gql`
                 nodes {
                   ...CompositionNodeData
                   ...CompositionComponentNodeData
+                  ... on ICompositionStructureNode {
+                    nodes {
+                      ...CompositionNodeData
+                      ...CompositionComponentNodeData
+                    }
+                  }
                 }
               }
             }
@@ -914,355 +492,6 @@ export const BlogSectionExperienceDataFragmentDoc = gql`
   ...ExperienceData
 }
     `;
-export const ExpTypeBlockSimpleBlockDataFragmentDoc = gql`
-    fragment ExpTypeBlockSimpleBlockData on ExpTypeBlockSimpleBlock {
-  BlockSimpleBlock {
-    ...SimpleBlockPropertyData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeChoiceDropDownListDataFragmentDoc = gql`
-    fragment ExpTypeChoiceDropDownListData on ExpTypeChoiceDropDownList {
-  ChoiceDropDownList
-  ...ExperienceData
-}
-    `;
-export const ExpTypeChoiceSelectListDataFragmentDoc = gql`
-    fragment ExpTypeChoiceSelectListData on ExpTypeChoiceSelectList {
-  ChoiceSelectList
-  ...ExperienceData
-}
-    `;
-export const ExpTypeChoiceSelectedNotSelectedDataFragmentDoc = gql`
-    fragment ExpTypeChoiceSelectedNotSelectedData on ExpTypeChoiceSelectedNotSelected {
-  ChoiceSelectedNotSelected
-  ...ExperienceData
-}
-    `;
-export const ExpTypeContentContentAreaDataFragmentDoc = gql`
-    fragment ExpTypeContentContentAreaData on ExpTypeContentContentArea {
-  ContentContentArea {
-    ...BlockData
-    ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
-    ...ButtonBlockData
-    ...CTAElementData
-    ...CarouselBlockData
-    ...ContentRecsElementData
-    ...ContinueReadingComponentData
-    ...HeadingElementData
-    ...HeroBlockData
-    ...ImageElementData
-    ...LayoutSettingsBlockData
-    ...MegaMenuGroupBlockData
-    ...MenuNavigationBlockData
-    ...OdpEmbedBlockData
-    ...PageSeoSettingsData
-    ...ParagraphElementData
-    ...QuoteBlockData
-    ...RichTextElementData
-    ...SimpleBlockData
-    ...TestimonialElementData
-    ...TextBlockData
-    ...VideoElementData
-    ...BlankSectionData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeContentContentAreaItemDataFragmentDoc = gql`
-    fragment ExpTypeContentContentAreaItemData on ExpTypeContentContentAreaItem {
-  ContentContentAreaItem {
-    ...BlockData
-    ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
-    ...ButtonBlockData
-    ...CTAElementData
-    ...CarouselBlockData
-    ...ContentRecsElementData
-    ...ContinueReadingComponentData
-    ...HeadingElementData
-    ...HeroBlockData
-    ...ImageElementData
-    ...LayoutSettingsBlockData
-    ...MegaMenuGroupBlockData
-    ...MenuNavigationBlockData
-    ...OdpEmbedBlockData
-    ...PageSeoSettingsData
-    ...ParagraphElementData
-    ...QuoteBlockData
-    ...RichTextElementData
-    ...SimpleBlockData
-    ...TestimonialElementData
-    ...TextBlockData
-    ...VideoElementData
-    ...BlankSectionData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeContentContentReferenceDataFragmentDoc = gql`
-    fragment ExpTypeContentContentReferenceData on ExpTypeContentContentReference {
-  ContentContentReference {
-    ...ReferenceData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeDateTimeDataFragmentDoc = gql`
-    fragment ExpTypeDateTimeData on ExpTypeDateTime {
-  DateTime
-  ...ExperienceData
-}
-    `;
-export const ExpTypeGuidDataFragmentDoc = gql`
-    fragment ExpTypeGuidData on ExpTypeGuid {
-  ...ExperienceData
-}
-    `;
-export const ExpTypeLinkLinkCollectionDataFragmentDoc = gql`
-    fragment ExpTypeLinkLinkCollectionData on ExpTypeLinkLinkCollection {
-  LinkLinkCollection {
-    ...LinkItemData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeLinkLinkItemDataFragmentDoc = gql`
-    fragment ExpTypeLinkLinkItemData on ExpTypeLinkLinkItem {
-  LinkLinkItem {
-    ...LinkItemData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeLinkUrlToDocumentDataFragmentDoc = gql`
-    fragment ExpTypeLinkUrlToDocumentData on ExpTypeLinkUrlToDocument {
-  LinkUrlToDocument {
-    ...LinkData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeLinkUrlToImageDataFragmentDoc = gql`
-    fragment ExpTypeLinkUrlToImageData on ExpTypeLinkUrlToImage {
-  LinkUrlToImage {
-    ...LinkData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeLinkUrlToPageDataFragmentDoc = gql`
-    fragment ExpTypeLinkUrlToPageData on ExpTypeLinkUrlToPage {
-  LinkUrlToPage {
-    ...LinkData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListBlockSimpleBlockDataFragmentDoc = gql`
-    fragment ExpTypeListBlockSimpleBlockData on ExpTypeListBlockSimpleBlock {
-  ListBlockSimpleBlock {
-    ...SimpleBlockPropertyData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListChoiceSelectedNotSelectedDataFragmentDoc = gql`
-    fragment ExpTypeListChoiceSelectedNotSelectedData on ExpTypeListChoiceSelectedNotSelected {
-  ListChoiceSelectedNotSelected
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListContentContentReferenceDataFragmentDoc = gql`
-    fragment ExpTypeListContentContentReferenceData on ExpTypeListContentContentReference {
-  ListContentContentReference {
-    ...ReferenceData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListDateTimeDataFragmentDoc = gql`
-    fragment ExpTypeListDateTimeData on ExpTypeListDateTime {
-  ListDateTime
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListGuidDataFragmentDoc = gql`
-    fragment ExpTypeListGuidData on ExpTypeListGuid {
-  ListGuid
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListLinkLinkItemDataFragmentDoc = gql`
-    fragment ExpTypeListLinkLinkItemData on ExpTypeListLinkLinkItem {
-  ListLinkLinkItem {
-    ...LinkItemData
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListLinkUrlToDocumentDataFragmentDoc = gql`
-    fragment ExpTypeListLinkUrlToDocumentData on ExpTypeListLinkUrlToDocument {
-  ListLinkUrlToDocument {
-    __typename
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListLinkUrlToImageDataFragmentDoc = gql`
-    fragment ExpTypeListLinkUrlToImageData on ExpTypeListLinkUrlToImage {
-  ListLinkUrlToImage {
-    __typename
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListLinkUrlToPageDataFragmentDoc = gql`
-    fragment ExpTypeListLinkUrlToPageData on ExpTypeListLinkUrlToPage {
-  ListLinkUrlToPage {
-    __typename
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListNumberFloatingPointDataFragmentDoc = gql`
-    fragment ExpTypeListNumberFloatingPointData on ExpTypeListNumberFloatingPoint {
-  ListNumberFloatingPoint
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListNumberIntegerDataFragmentDoc = gql`
-    fragment ExpTypeListNumberIntegerData on ExpTypeListNumberInteger {
-  ListNumberInteger
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListTextLongStringDataFragmentDoc = gql`
-    fragment ExpTypeListTextLongStringData on ExpTypeListTextLongString {
-  ListTextLongString
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListTextStringDataFragmentDoc = gql`
-    fragment ExpTypeListTextStringData on ExpTypeListTextString {
-  ListTextString
-  ...ExperienceData
-}
-    `;
-export const ExpTypeListTextXHtmlStringDataFragmentDoc = gql`
-    fragment ExpTypeListTextXHtmlStringData on ExpTypeListTextXHtmlString {
-  ListTextXHtmlString {
-    json
-    html
-  }
-  ...ExperienceData
-}
-    `;
-export const ExpTypeNumberFloatingPointDataFragmentDoc = gql`
-    fragment ExpTypeNumberFloatingPointData on ExpTypeNumberFloatingPoint {
-  NumberFloatingPoint
-  ...ExperienceData
-}
-    `;
-export const ExpTypeNumberIntegerDataFragmentDoc = gql`
-    fragment ExpTypeNumberIntegerData on ExpTypeNumberInteger {
-  NumberInteger
-  ...ExperienceData
-}
-    `;
-export const ExpTypeTextLongStringDataFragmentDoc = gql`
-    fragment ExpTypeTextLongStringData on ExpTypeTextLongString {
-  TextLongString
-  ...ExperienceData
-}
-    `;
-export const ExpTypeTextStringDataFragmentDoc = gql`
-    fragment ExpTypeTextStringData on ExpTypeTextString {
-  TextString
-  ...ExperienceData
-}
-    `;
-export const ExpTypeTextXHtmlStringDataFragmentDoc = gql`
-    fragment ExpTypeTextXHtmlStringData on ExpTypeTextXHtmlString {
-  TextXHtmlString {
-    json
-    html
-  }
-  ...ExperienceData
-}
-    `;
-export const SimpleExpDataFragmentDoc = gql`
-    fragment SimpleExpData on SimpleExp {
-  StringProp
-  ...ExperienceData
-}
-    `;
 export const BlogPostPageDataFragmentDoc = gql`
     fragment BlogPostPageData on BlogPostPage {
   blogTitle: Heading
@@ -1281,39 +510,6 @@ export const BlogPostPageDataFragmentDoc = gql`
     ...ImageMediaComponentData
     ...VideoMediaComponentData
     ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
     ...ButtonBlockData
     ...CTAElementData
     ...CarouselBlockData
@@ -1330,7 +526,6 @@ export const BlogPostPageDataFragmentDoc = gql`
     ...ParagraphElementData
     ...QuoteBlockData
     ...RichTextElementData
-    ...SimpleBlockData
     ...TestimonialElementData
     ...TextBlockData
     ...VideoElementData
@@ -1359,39 +554,6 @@ export const LandingPageDataFragmentDoc = gql`
   TopContentArea {
     ...BlockData
     ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
     ...ButtonBlockData
     ...CTAElementData
     ...CarouselBlockData
@@ -1408,7 +570,6 @@ export const LandingPageDataFragmentDoc = gql`
     ...ParagraphElementData
     ...QuoteBlockData
     ...RichTextElementData
-    ...SimpleBlockData
     ...TestimonialElementData
     ...TextBlockData
     ...VideoElementData
@@ -1417,39 +578,6 @@ export const LandingPageDataFragmentDoc = gql`
   MainContentArea {
     ...BlockData
     ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
     ...ButtonBlockData
     ...CTAElementData
     ...CarouselBlockData
@@ -1466,334 +594,11 @@ export const LandingPageDataFragmentDoc = gql`
     ...ParagraphElementData
     ...QuoteBlockData
     ...RichTextElementData
-    ...SimpleBlockData
     ...TestimonialElementData
     ...TextBlockData
     ...VideoElementData
     ...BlankSectionData
   }
-}
-    `;
-export const PageTypeBlockSimpleBlockDataFragmentDoc = gql`
-    fragment PageTypeBlockSimpleBlockData on PageTypeBlockSimpleBlock {
-  BlockSimpleBlock {
-    ...SimpleBlockPropertyData
-  }
-}
-    `;
-export const PageTypeChoiceDropDownListDataFragmentDoc = gql`
-    fragment PageTypeChoiceDropDownListData on PageTypeChoiceDropDownList {
-  ChoiceDropDownList
-}
-    `;
-export const PageTypeChoiceSelectListDataFragmentDoc = gql`
-    fragment PageTypeChoiceSelectListData on PageTypeChoiceSelectList {
-  ChoiceSelectList
-}
-    `;
-export const PageTypeChoiceSelectedNotSelectedDataFragmentDoc = gql`
-    fragment PageTypeChoiceSelectedNotSelectedData on PageTypeChoiceSelectedNotSelected {
-  ChoiceSelectedNotSelected
-}
-    `;
-export const PageTypeContentContentAreaDataFragmentDoc = gql`
-    fragment PageTypeContentContentAreaData on PageTypeContentContentArea {
-  ContentContentArea {
-    ...IContentListItem
-    ...BlockData
-    ...ImageMediaComponentData
-    ...VideoMediaComponentData
-    ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
-    ...ButtonBlockData
-    ...CTAElementData
-    ...CarouselBlockData
-    ...ContentRecsElementData
-    ...ContinueReadingComponentData
-    ...HeadingElementData
-    ...HeroBlockData
-    ...ImageElementData
-    ...LayoutSettingsBlockData
-    ...MegaMenuGroupBlockData
-    ...MenuNavigationBlockData
-    ...OdpEmbedBlockData
-    ...PageSeoSettingsData
-    ...ParagraphElementData
-    ...QuoteBlockData
-    ...RichTextElementData
-    ...SimpleBlockData
-    ...TestimonialElementData
-    ...TextBlockData
-    ...VideoElementData
-    ...BlankSectionData
-  }
-}
-    `;
-export const PageTypeContentContentAreaItemDataFragmentDoc = gql`
-    fragment PageTypeContentContentAreaItemData on PageTypeContentContentAreaItem {
-  ContentContentAreaItem {
-    ...IContentListItem
-    ...BlockData
-    ...ImageMediaComponentData
-    ...VideoMediaComponentData
-    ...ArticleListElementData
-    ...BlockTypeBlockSimpleBlockData
-    ...BlockTypeChoiceDropDownListData
-    ...BlockTypeChoiceSelectListData
-    ...BlockTypeChoiceSelectedNotSelectedData
-    ...BlockTypeContentContentAreaData
-    ...BlockTypeContentContentAreaItemData
-    ...BlockTypeContentContentReferenceData
-    ...BlockTypeDateTimeData
-    ...BlockTypeGuidData
-    ...BlockTypeLinkLinkCollectionData
-    ...BlockTypeLinkLinkItemData
-    ...BlockTypeLinkUrlToDocumentData
-    ...BlockTypeLinkUrlToImageData
-    ...BlockTypeLinkUrlToPageData
-    ...BlockTypeListBlockSimpleBlockData
-    ...BlockTypeListChoiceSelectedNotSelectedData
-    ...BlockTypeListContentContentReferenceData
-    ...BlockTypeListDateTimeData
-    ...BlockTypeListGuidData
-    ...BlockTypeListLinkLinkItemData
-    ...BlockTypeListLinkUrlToDocumentData
-    ...BlockTypeListLinkUrlToImageData
-    ...BlockTypeListLinkUrlToPageData
-    ...BlockTypeListNumberFloatingPointData
-    ...BlockTypeListNumberIntegerData
-    ...BlockTypeListTextLongStringData
-    ...BlockTypeListTextStringData
-    ...BlockTypeListTextXHtmlStringData
-    ...BlockTypeNumberFloatingPointData
-    ...BlockTypeNumberIntegerData
-    ...BlockTypeTextLongStringData
-    ...BlockTypeTextStringData
-    ...BlockTypeTextXHtmlStringData
-    ...ButtonBlockData
-    ...CTAElementData
-    ...CarouselBlockData
-    ...ContentRecsElementData
-    ...ContinueReadingComponentData
-    ...HeadingElementData
-    ...HeroBlockData
-    ...ImageElementData
-    ...LayoutSettingsBlockData
-    ...MegaMenuGroupBlockData
-    ...MenuNavigationBlockData
-    ...OdpEmbedBlockData
-    ...PageSeoSettingsData
-    ...ParagraphElementData
-    ...QuoteBlockData
-    ...RichTextElementData
-    ...SimpleBlockData
-    ...TestimonialElementData
-    ...TextBlockData
-    ...VideoElementData
-    ...BlankSectionData
-  }
-}
-    `;
-export const PageTypeContentContentReferenceDataFragmentDoc = gql`
-    fragment PageTypeContentContentReferenceData on PageTypeContentContentReference {
-  ContentContentReference {
-    ...ReferenceData
-  }
-}
-    `;
-export const PageTypeDateTimeDataFragmentDoc = gql`
-    fragment PageTypeDateTimeData on PageTypeDateTime {
-  DateTime
-}
-    `;
-export const PageTypeGuidDataFragmentDoc = gql`
-    fragment PageTypeGuidData on PageTypeGuid {
-  Guid
-}
-    `;
-export const PageTypeLinkLinkCollectionDataFragmentDoc = gql`
-    fragment PageTypeLinkLinkCollectionData on PageTypeLinkLinkCollection {
-  LinkLinkCollection {
-    ...LinkItemData
-  }
-}
-    `;
-export const PageTypeLinkLinkItemDataFragmentDoc = gql`
-    fragment PageTypeLinkLinkItemData on PageTypeLinkLinkItem {
-  LinkLinkItem {
-    ...LinkItemData
-  }
-}
-    `;
-export const PageTypeLinkUrlToDocumentDataFragmentDoc = gql`
-    fragment PageTypeLinkUrlToDocumentData on PageTypeLinkUrlToDocument {
-  LinkUrlToDocument {
-    ...LinkData
-  }
-}
-    `;
-export const PageTypeLinkUrlToImageDataFragmentDoc = gql`
-    fragment PageTypeLinkUrlToImageData on PageTypeLinkUrlToImage {
-  LinkUrlToImage {
-    ...LinkData
-  }
-}
-    `;
-export const PageTypeLinkUrlToPageDataFragmentDoc = gql`
-    fragment PageTypeLinkUrlToPageData on PageTypeLinkUrlToPage {
-  LinkUrlToPage {
-    ...LinkData
-  }
-}
-    `;
-export const PageTypeListBlockSimpleBlockDataFragmentDoc = gql`
-    fragment PageTypeListBlockSimpleBlockData on PageTypeListBlockSimpleBlock {
-  ListBlockSimpleBlock {
-    ...SimpleBlockPropertyData
-  }
-}
-    `;
-export const PageTypeListChoiceSelectedNotSelectedDataFragmentDoc = gql`
-    fragment PageTypeListChoiceSelectedNotSelectedData on PageTypeListChoiceSelectedNotSelected {
-  ListChoiceSelectedNotSelected
-}
-    `;
-export const PageTypeListContentContentReferenceDataFragmentDoc = gql`
-    fragment PageTypeListContentContentReferenceData on PageTypeListContentContentReference {
-  ListContentContentReference {
-    ...ReferenceData
-  }
-}
-    `;
-export const PageTypeListDateTimeDataFragmentDoc = gql`
-    fragment PageTypeListDateTimeData on PageTypeListDateTime {
-  ListDateTime
-}
-    `;
-export const PageTypeListGuidDataFragmentDoc = gql`
-    fragment PageTypeListGuidData on PageTypeListGuid {
-  ListGuid
-}
-    `;
-export const PageTypeListLinkLinkItemDataFragmentDoc = gql`
-    fragment PageTypeListLinkLinkItemData on PageTypeListLinkLinkItem {
-  ListLinkLinkItem {
-    ...LinkItemData
-  }
-}
-    `;
-export const PageTypeListLinkUrlToDocumentDataFragmentDoc = gql`
-    fragment PageTypeListLinkUrlToDocumentData on PageTypeListLinkUrlToDocument {
-  ListLinkUrlToDocument {
-    __typename
-  }
-}
-    `;
-export const PageTypeListLinkUrlToImageDataFragmentDoc = gql`
-    fragment PageTypeListLinkUrlToImageData on PageTypeListLinkUrlToImage {
-  ListLinkUrlToImage {
-    __typename
-  }
-}
-    `;
-export const PageTypeListLinkUrlToPageDataFragmentDoc = gql`
-    fragment PageTypeListLinkUrlToPageData on PageTypeListLinkUrlToPage {
-  ListLinkUrlToPage {
-    __typename
-  }
-}
-    `;
-export const PageTypeListNumberFloatingPointDataFragmentDoc = gql`
-    fragment PageTypeListNumberFloatingPointData on PageTypeListNumberFloatingPoint {
-  ListNumberFloatingPoint
-}
-    `;
-export const PageTypeListNumberIntegerDataFragmentDoc = gql`
-    fragment PageTypeListNumberIntegerData on PageTypeListNumberInteger {
-  ListNumberInteger
-}
-    `;
-export const PageTypeListTextLongStringDataFragmentDoc = gql`
-    fragment PageTypeListTextLongStringData on PageTypeListTextLongString {
-  ListTextLongString
-}
-    `;
-export const PageTypeListTextStringDataFragmentDoc = gql`
-    fragment PageTypeListTextStringData on PageTypeListTextString {
-  ListTextString
-}
-    `;
-export const PageTypeListTextXHtmlStringDataFragmentDoc = gql`
-    fragment PageTypeListTextXHtmlStringData on PageTypeListTextXHtmlString {
-  ListTextXHtmlString {
-    json
-    html
-  }
-}
-    `;
-export const PageTypeNumberFloatingPointDataFragmentDoc = gql`
-    fragment PageTypeNumberFloatingPointData on PageTypeNumberFloatingPoint {
-  NumberFloatingPoint
-}
-    `;
-export const PageTypeNumberIntegerDataFragmentDoc = gql`
-    fragment PageTypeNumberIntegerData on PageTypeNumberInteger {
-  NumberInteger
-}
-    `;
-export const PageTypeTextLongStringDataFragmentDoc = gql`
-    fragment PageTypeTextLongStringData on PageTypeTextLongString {
-  TextLongString
-}
-    `;
-export const PageTypeTextStringDataFragmentDoc = gql`
-    fragment PageTypeTextStringData on PageTypeTextString {
-  TextString
-}
-    `;
-export const PageTypeTextXHtmlStringDataFragmentDoc = gql`
-    fragment PageTypeTextXHtmlStringData on PageTypeTextXHtmlString {
-  TextXHtmlString {
-    json
-    html
-  }
-}
-    `;
-export const SimplePageDataFragmentDoc = gql`
-    fragment SimplePageData on SimplePage {
-  StringProp
 }
     `;
 export const SearchDataFragmentDoc = gql`
@@ -1871,54 +676,20 @@ ${LinkDataFragmentDoc}
 ${ContinueReadingComponentDataFragmentDoc}
 ${BlockDataFragmentDoc}
 ${ArticleListElementDataFragmentDoc}
-${BlockTypeBlockSimpleBlockDataFragmentDoc}
-${SimpleBlockPropertyDataFragmentDoc}
-${BlockTypeChoiceDropDownListDataFragmentDoc}
-${BlockTypeChoiceSelectListDataFragmentDoc}
-${BlockTypeChoiceSelectedNotSelectedDataFragmentDoc}
-${BlockTypeContentContentAreaDataFragmentDoc}
-${IContentListItemFragmentDoc}
-${ImageMediaComponentDataFragmentDoc}
-${VideoMediaComponentDataFragmentDoc}
-${BlockTypeContentContentAreaItemDataFragmentDoc}
-${BlockTypeContentContentReferenceDataFragmentDoc}
-${ReferenceDataFragmentDoc}
-${BlockTypeDateTimeDataFragmentDoc}
-${BlockTypeGuidDataFragmentDoc}
-${BlockTypeLinkLinkCollectionDataFragmentDoc}
-${LinkItemDataFragmentDoc}
-${BlockTypeLinkLinkItemDataFragmentDoc}
-${BlockTypeLinkUrlToDocumentDataFragmentDoc}
-${BlockTypeLinkUrlToImageDataFragmentDoc}
-${BlockTypeLinkUrlToPageDataFragmentDoc}
-${BlockTypeListBlockSimpleBlockDataFragmentDoc}
-${BlockTypeListChoiceSelectedNotSelectedDataFragmentDoc}
-${BlockTypeListContentContentReferenceDataFragmentDoc}
-${BlockTypeListDateTimeDataFragmentDoc}
-${BlockTypeListGuidDataFragmentDoc}
-${BlockTypeListLinkLinkItemDataFragmentDoc}
-${BlockTypeListLinkUrlToDocumentDataFragmentDoc}
-${BlockTypeListLinkUrlToImageDataFragmentDoc}
-${BlockTypeListLinkUrlToPageDataFragmentDoc}
-${BlockTypeListNumberFloatingPointDataFragmentDoc}
-${BlockTypeListNumberIntegerDataFragmentDoc}
-${BlockTypeListTextLongStringDataFragmentDoc}
-${BlockTypeListTextStringDataFragmentDoc}
-${BlockTypeListTextXHtmlStringDataFragmentDoc}
-${BlockTypeNumberFloatingPointDataFragmentDoc}
-${BlockTypeNumberIntegerDataFragmentDoc}
-${BlockTypeTextLongStringDataFragmentDoc}
-${BlockTypeTextStringDataFragmentDoc}
-${BlockTypeTextXHtmlStringDataFragmentDoc}
 ${ButtonBlockDataFragmentDoc}
 ${CTAElementDataFragmentDoc}
 ${CarouselBlockDataFragmentDoc}
+${IContentListItemFragmentDoc}
+${ImageMediaComponentDataFragmentDoc}
+${VideoMediaComponentDataFragmentDoc}
 ${ContentRecsElementDataFragmentDoc}
 ${HeadingElementDataFragmentDoc}
 ${HeroBlockDataFragmentDoc}
+${ReferenceDataFragmentDoc}
 ${ButtonBlockPropertyDataFragmentDoc}
 ${ImageElementDataFragmentDoc}
 ${LayoutSettingsBlockDataFragmentDoc}
+${LinkItemDataFragmentDoc}
 ${MegaMenuGroupBlockDataFragmentDoc}
 ${MenuNavigationBlockDataFragmentDoc}
 ${BlogPostPageMenuBlockFragmentDoc}
@@ -1927,7 +698,6 @@ ${PageSeoSettingsDataFragmentDoc}
 ${ParagraphElementDataFragmentDoc}
 ${QuoteBlockDataFragmentDoc}
 ${RichTextElementDataFragmentDoc}
-${SimpleBlockDataFragmentDoc}
 ${TestimonialElementDataFragmentDoc}
 ${TextBlockDataFragmentDoc}
 ${VideoElementDataFragmentDoc}
@@ -2304,49 +1074,18 @@ ${LinkDataFragmentDoc}
 ${BlogPostPageSearchResultFragmentDoc}
 ${ReferenceDataFragmentDoc}`;
 export const getContentByIdDocument = gql`
-    query getContentById($key: String!, $version: String, $locale: [Locales!], $path: String, $domain: String) {
+    query getContentById($key: String!, $version: String, $locale: [Locales!], $path: String = "-", $domain: String, $changeset: String) {
   content: _Content(
-    where: {_or: [{_metadata: {key: {eq: $key}, version: {eq: $version}}}, {_metadata: {url: {hierarchical: {eq: $path}, base: {eq: $domain}}, version: {eq: $version}}}]}
+    variation: {include: ALL}
+    where: {_or: [{_metadata: {key: {eq: $key}, version: {eq: $version}}}, {_metadata: {url: {default: {eq: $path}, base: {eq: $domain}}, version: {eq: $version}}}], _metadata: {changeset: {eq: $changeset}}}
     locale: $locale
   ) {
     total
     items: item {
+      ...IContentData
       ...BlockData
       ...PageData
       ...ArticleListElementData
-      ...BlockTypeBlockSimpleBlockData
-      ...BlockTypeChoiceDropDownListData
-      ...BlockTypeChoiceSelectListData
-      ...BlockTypeChoiceSelectedNotSelectedData
-      ...BlockTypeContentContentAreaData
-      ...BlockTypeContentContentAreaItemData
-      ...BlockTypeContentContentReferenceData
-      ...BlockTypeDateTimeData
-      ...BlockTypeGuidData
-      ...BlockTypeLinkLinkCollectionData
-      ...BlockTypeLinkLinkItemData
-      ...BlockTypeLinkUrlToDocumentData
-      ...BlockTypeLinkUrlToImageData
-      ...BlockTypeLinkUrlToPageData
-      ...BlockTypeListBlockSimpleBlockData
-      ...BlockTypeListChoiceSelectedNotSelectedData
-      ...BlockTypeListContentContentReferenceData
-      ...BlockTypeListDateTimeData
-      ...BlockTypeListGuidData
-      ...BlockTypeListLinkLinkItemData
-      ...BlockTypeListLinkUrlToDocumentData
-      ...BlockTypeListLinkUrlToImageData
-      ...BlockTypeListLinkUrlToPageData
-      ...BlockTypeListNumberFloatingPointData
-      ...BlockTypeListNumberIntegerData
-      ...BlockTypeListTextLongStringData
-      ...BlockTypeListTextStringData
-      ...BlockTypeListTextXHtmlStringData
-      ...BlockTypeNumberFloatingPointData
-      ...BlockTypeNumberIntegerData
-      ...BlockTypeTextLongStringData
-      ...BlockTypeTextStringData
-      ...BlockTypeTextXHtmlStringData
       ...ButtonBlockData
       ...CTAElementData
       ...CarouselBlockData
@@ -2363,141 +1102,38 @@ export const getContentByIdDocument = gql`
       ...ParagraphElementData
       ...QuoteBlockData
       ...RichTextElementData
-      ...SimpleBlockData
       ...TestimonialElementData
       ...TextBlockData
       ...VideoElementData
       ...BlankSectionData
       ...BlankExperienceData
       ...BlogSectionExperienceData
-      ...ExpTypeBlockSimpleBlockData
-      ...ExpTypeChoiceDropDownListData
-      ...ExpTypeChoiceSelectListData
-      ...ExpTypeChoiceSelectedNotSelectedData
-      ...ExpTypeContentContentAreaData
-      ...ExpTypeContentContentAreaItemData
-      ...ExpTypeContentContentReferenceData
-      ...ExpTypeDateTimeData
-      ...ExpTypeGuidData
-      ...ExpTypeLinkLinkCollectionData
-      ...ExpTypeLinkLinkItemData
-      ...ExpTypeLinkUrlToDocumentData
-      ...ExpTypeLinkUrlToImageData
-      ...ExpTypeLinkUrlToPageData
-      ...ExpTypeListBlockSimpleBlockData
-      ...ExpTypeListChoiceSelectedNotSelectedData
-      ...ExpTypeListContentContentReferenceData
-      ...ExpTypeListDateTimeData
-      ...ExpTypeListGuidData
-      ...ExpTypeListLinkLinkItemData
-      ...ExpTypeListLinkUrlToDocumentData
-      ...ExpTypeListLinkUrlToImageData
-      ...ExpTypeListLinkUrlToPageData
-      ...ExpTypeListNumberFloatingPointData
-      ...ExpTypeListNumberIntegerData
-      ...ExpTypeListTextLongStringData
-      ...ExpTypeListTextStringData
-      ...ExpTypeListTextXHtmlStringData
-      ...ExpTypeNumberFloatingPointData
-      ...ExpTypeNumberIntegerData
-      ...ExpTypeTextLongStringData
-      ...ExpTypeTextStringData
-      ...ExpTypeTextXHtmlStringData
-      ...SimpleExpData
       ...BlogPostPageData
       ...LandingPageData
-      ...PageTypeBlockSimpleBlockData
-      ...PageTypeChoiceDropDownListData
-      ...PageTypeChoiceSelectListData
-      ...PageTypeChoiceSelectedNotSelectedData
-      ...PageTypeContentContentAreaData
-      ...PageTypeContentContentAreaItemData
-      ...PageTypeContentContentReferenceData
-      ...PageTypeDateTimeData
-      ...PageTypeGuidData
-      ...PageTypeLinkLinkCollectionData
-      ...PageTypeLinkLinkItemData
-      ...PageTypeLinkUrlToDocumentData
-      ...PageTypeLinkUrlToImageData
-      ...PageTypeLinkUrlToPageData
-      ...PageTypeListBlockSimpleBlockData
-      ...PageTypeListChoiceSelectedNotSelectedData
-      ...PageTypeListContentContentReferenceData
-      ...PageTypeListDateTimeData
-      ...PageTypeListGuidData
-      ...PageTypeListLinkLinkItemData
-      ...PageTypeListLinkUrlToDocumentData
-      ...PageTypeListLinkUrlToImageData
-      ...PageTypeListLinkUrlToPageData
-      ...PageTypeListNumberFloatingPointData
-      ...PageTypeListNumberIntegerData
-      ...PageTypeListTextLongStringData
-      ...PageTypeListTextStringData
-      ...PageTypeListTextXHtmlStringData
-      ...PageTypeNumberFloatingPointData
-      ...PageTypeNumberIntegerData
-      ...PageTypeTextLongStringData
-      ...PageTypeTextStringData
-      ...PageTypeTextXHtmlStringData
-      ...SimplePageData
     }
   }
 }
-    ${BlockDataFragmentDoc}
-${IContentDataFragmentDoc}
+    ${IContentDataFragmentDoc}
 ${IContentInfoFragmentDoc}
 ${LinkDataFragmentDoc}
+${BlockDataFragmentDoc}
 ${PageDataFragmentDoc}
 ${ArticleListElementDataFragmentDoc}
-${BlockTypeBlockSimpleBlockDataFragmentDoc}
-${SimpleBlockPropertyDataFragmentDoc}
-${BlockTypeChoiceDropDownListDataFragmentDoc}
-${BlockTypeChoiceSelectListDataFragmentDoc}
-${BlockTypeChoiceSelectedNotSelectedDataFragmentDoc}
-${BlockTypeContentContentAreaDataFragmentDoc}
-${IContentListItemFragmentDoc}
-${ImageMediaComponentDataFragmentDoc}
-${VideoMediaComponentDataFragmentDoc}
-${BlockTypeContentContentAreaItemDataFragmentDoc}
-${BlockTypeContentContentReferenceDataFragmentDoc}
-${ReferenceDataFragmentDoc}
-${BlockTypeDateTimeDataFragmentDoc}
-${BlockTypeGuidDataFragmentDoc}
-${BlockTypeLinkLinkCollectionDataFragmentDoc}
-${LinkItemDataFragmentDoc}
-${BlockTypeLinkLinkItemDataFragmentDoc}
-${BlockTypeLinkUrlToDocumentDataFragmentDoc}
-${BlockTypeLinkUrlToImageDataFragmentDoc}
-${BlockTypeLinkUrlToPageDataFragmentDoc}
-${BlockTypeListBlockSimpleBlockDataFragmentDoc}
-${BlockTypeListChoiceSelectedNotSelectedDataFragmentDoc}
-${BlockTypeListContentContentReferenceDataFragmentDoc}
-${BlockTypeListDateTimeDataFragmentDoc}
-${BlockTypeListGuidDataFragmentDoc}
-${BlockTypeListLinkLinkItemDataFragmentDoc}
-${BlockTypeListLinkUrlToDocumentDataFragmentDoc}
-${BlockTypeListLinkUrlToImageDataFragmentDoc}
-${BlockTypeListLinkUrlToPageDataFragmentDoc}
-${BlockTypeListNumberFloatingPointDataFragmentDoc}
-${BlockTypeListNumberIntegerDataFragmentDoc}
-${BlockTypeListTextLongStringDataFragmentDoc}
-${BlockTypeListTextStringDataFragmentDoc}
-${BlockTypeListTextXHtmlStringDataFragmentDoc}
-${BlockTypeNumberFloatingPointDataFragmentDoc}
-${BlockTypeNumberIntegerDataFragmentDoc}
-${BlockTypeTextLongStringDataFragmentDoc}
-${BlockTypeTextStringDataFragmentDoc}
-${BlockTypeTextXHtmlStringDataFragmentDoc}
 ${ButtonBlockDataFragmentDoc}
 ${CTAElementDataFragmentDoc}
 ${CarouselBlockDataFragmentDoc}
+${IContentListItemFragmentDoc}
+${ImageMediaComponentDataFragmentDoc}
+${VideoMediaComponentDataFragmentDoc}
 ${ContentRecsElementDataFragmentDoc}
 ${ContinueReadingComponentDataFragmentDoc}
 ${HeadingElementDataFragmentDoc}
 ${HeroBlockDataFragmentDoc}
+${ReferenceDataFragmentDoc}
 ${ButtonBlockPropertyDataFragmentDoc}
 ${ImageElementDataFragmentDoc}
 ${LayoutSettingsBlockDataFragmentDoc}
+${LinkItemDataFragmentDoc}
 ${MegaMenuGroupBlockDataFragmentDoc}
 ${MenuNavigationBlockDataFragmentDoc}
 ${BlogPostPageMenuBlockFragmentDoc}
@@ -2506,7 +1142,6 @@ ${PageSeoSettingsDataFragmentDoc}
 ${ParagraphElementDataFragmentDoc}
 ${QuoteBlockDataFragmentDoc}
 ${RichTextElementDataFragmentDoc}
-${SimpleBlockDataFragmentDoc}
 ${TestimonialElementDataFragmentDoc}
 ${TextBlockDataFragmentDoc}
 ${VideoElementDataFragmentDoc}
@@ -2519,80 +1154,12 @@ ${CompositionComponentNodeDataFragmentDoc}
 ${ElementDataFragmentDoc}
 ${IElementDataFragmentDoc}
 ${BlogSectionExperienceDataFragmentDoc}
-${ExpTypeBlockSimpleBlockDataFragmentDoc}
-${ExpTypeChoiceDropDownListDataFragmentDoc}
-${ExpTypeChoiceSelectListDataFragmentDoc}
-${ExpTypeChoiceSelectedNotSelectedDataFragmentDoc}
-${ExpTypeContentContentAreaDataFragmentDoc}
-${ExpTypeContentContentAreaItemDataFragmentDoc}
-${ExpTypeContentContentReferenceDataFragmentDoc}
-${ExpTypeDateTimeDataFragmentDoc}
-${ExpTypeGuidDataFragmentDoc}
-${ExpTypeLinkLinkCollectionDataFragmentDoc}
-${ExpTypeLinkLinkItemDataFragmentDoc}
-${ExpTypeLinkUrlToDocumentDataFragmentDoc}
-${ExpTypeLinkUrlToImageDataFragmentDoc}
-${ExpTypeLinkUrlToPageDataFragmentDoc}
-${ExpTypeListBlockSimpleBlockDataFragmentDoc}
-${ExpTypeListChoiceSelectedNotSelectedDataFragmentDoc}
-${ExpTypeListContentContentReferenceDataFragmentDoc}
-${ExpTypeListDateTimeDataFragmentDoc}
-${ExpTypeListGuidDataFragmentDoc}
-${ExpTypeListLinkLinkItemDataFragmentDoc}
-${ExpTypeListLinkUrlToDocumentDataFragmentDoc}
-${ExpTypeListLinkUrlToImageDataFragmentDoc}
-${ExpTypeListLinkUrlToPageDataFragmentDoc}
-${ExpTypeListNumberFloatingPointDataFragmentDoc}
-${ExpTypeListNumberIntegerDataFragmentDoc}
-${ExpTypeListTextLongStringDataFragmentDoc}
-${ExpTypeListTextStringDataFragmentDoc}
-${ExpTypeListTextXHtmlStringDataFragmentDoc}
-${ExpTypeNumberFloatingPointDataFragmentDoc}
-${ExpTypeNumberIntegerDataFragmentDoc}
-${ExpTypeTextLongStringDataFragmentDoc}
-${ExpTypeTextStringDataFragmentDoc}
-${ExpTypeTextXHtmlStringDataFragmentDoc}
-${SimpleExpDataFragmentDoc}
 ${BlogPostPageDataFragmentDoc}
-${LandingPageDataFragmentDoc}
-${PageTypeBlockSimpleBlockDataFragmentDoc}
-${PageTypeChoiceDropDownListDataFragmentDoc}
-${PageTypeChoiceSelectListDataFragmentDoc}
-${PageTypeChoiceSelectedNotSelectedDataFragmentDoc}
-${PageTypeContentContentAreaDataFragmentDoc}
-${PageTypeContentContentAreaItemDataFragmentDoc}
-${PageTypeContentContentReferenceDataFragmentDoc}
-${PageTypeDateTimeDataFragmentDoc}
-${PageTypeGuidDataFragmentDoc}
-${PageTypeLinkLinkCollectionDataFragmentDoc}
-${PageTypeLinkLinkItemDataFragmentDoc}
-${PageTypeLinkUrlToDocumentDataFragmentDoc}
-${PageTypeLinkUrlToImageDataFragmentDoc}
-${PageTypeLinkUrlToPageDataFragmentDoc}
-${PageTypeListBlockSimpleBlockDataFragmentDoc}
-${PageTypeListChoiceSelectedNotSelectedDataFragmentDoc}
-${PageTypeListContentContentReferenceDataFragmentDoc}
-${PageTypeListDateTimeDataFragmentDoc}
-${PageTypeListGuidDataFragmentDoc}
-${PageTypeListLinkLinkItemDataFragmentDoc}
-${PageTypeListLinkUrlToDocumentDataFragmentDoc}
-${PageTypeListLinkUrlToImageDataFragmentDoc}
-${PageTypeListLinkUrlToPageDataFragmentDoc}
-${PageTypeListNumberFloatingPointDataFragmentDoc}
-${PageTypeListNumberIntegerDataFragmentDoc}
-${PageTypeListTextLongStringDataFragmentDoc}
-${PageTypeListTextStringDataFragmentDoc}
-${PageTypeListTextXHtmlStringDataFragmentDoc}
-${PageTypeNumberFloatingPointDataFragmentDoc}
-${PageTypeNumberIntegerDataFragmentDoc}
-${PageTypeTextLongStringDataFragmentDoc}
-${PageTypeTextStringDataFragmentDoc}
-${PageTypeTextXHtmlStringDataFragmentDoc}
-${SimplePageDataFragmentDoc}`;
+${LandingPageDataFragmentDoc}`;
 export const getContentByPathDocument = gql`
-    query getContentByPath($path: [String!]!, $locale: [Locales!], $siteId: String) {
+    query getContentByPath($path: [String!]!, $locale: [Locales!], $siteId: String, $changeset: String = null) {
   content: _Content(
-    where: {_metadata: {url: {default: {in: $path}, base: {eq: $siteId}}}}
+    where: {_metadata: {url: {default: {in: $path}, base: {eq: $siteId}}, changeset: {eq: $changeset}}}
     locale: $locale
   ) {
     total
@@ -2601,76 +1168,8 @@ export const getContentByPathDocument = gql`
       ...PageData
       ...BlankExperienceData
       ...BlogSectionExperienceData
-      ...ExpTypeBlockSimpleBlockData
-      ...ExpTypeChoiceDropDownListData
-      ...ExpTypeChoiceSelectListData
-      ...ExpTypeChoiceSelectedNotSelectedData
-      ...ExpTypeContentContentAreaData
-      ...ExpTypeContentContentAreaItemData
-      ...ExpTypeContentContentReferenceData
-      ...ExpTypeDateTimeData
-      ...ExpTypeGuidData
-      ...ExpTypeLinkLinkCollectionData
-      ...ExpTypeLinkLinkItemData
-      ...ExpTypeLinkUrlToDocumentData
-      ...ExpTypeLinkUrlToImageData
-      ...ExpTypeLinkUrlToPageData
-      ...ExpTypeListBlockSimpleBlockData
-      ...ExpTypeListChoiceSelectedNotSelectedData
-      ...ExpTypeListContentContentReferenceData
-      ...ExpTypeListDateTimeData
-      ...ExpTypeListGuidData
-      ...ExpTypeListLinkLinkItemData
-      ...ExpTypeListLinkUrlToDocumentData
-      ...ExpTypeListLinkUrlToImageData
-      ...ExpTypeListLinkUrlToPageData
-      ...ExpTypeListNumberFloatingPointData
-      ...ExpTypeListNumberIntegerData
-      ...ExpTypeListTextLongStringData
-      ...ExpTypeListTextStringData
-      ...ExpTypeListTextXHtmlStringData
-      ...ExpTypeNumberFloatingPointData
-      ...ExpTypeNumberIntegerData
-      ...ExpTypeTextLongStringData
-      ...ExpTypeTextStringData
-      ...ExpTypeTextXHtmlStringData
-      ...SimpleExpData
       ...BlogPostPageData
       ...LandingPageData
-      ...PageTypeBlockSimpleBlockData
-      ...PageTypeChoiceDropDownListData
-      ...PageTypeChoiceSelectListData
-      ...PageTypeChoiceSelectedNotSelectedData
-      ...PageTypeContentContentAreaData
-      ...PageTypeContentContentAreaItemData
-      ...PageTypeContentContentReferenceData
-      ...PageTypeDateTimeData
-      ...PageTypeGuidData
-      ...PageTypeLinkLinkCollectionData
-      ...PageTypeLinkLinkItemData
-      ...PageTypeLinkUrlToDocumentData
-      ...PageTypeLinkUrlToImageData
-      ...PageTypeLinkUrlToPageData
-      ...PageTypeListBlockSimpleBlockData
-      ...PageTypeListChoiceSelectedNotSelectedData
-      ...PageTypeListContentContentReferenceData
-      ...PageTypeListDateTimeData
-      ...PageTypeListGuidData
-      ...PageTypeListLinkLinkItemData
-      ...PageTypeListLinkUrlToDocumentData
-      ...PageTypeListLinkUrlToImageData
-      ...PageTypeListLinkUrlToPageData
-      ...PageTypeListNumberFloatingPointData
-      ...PageTypeListNumberIntegerData
-      ...PageTypeListTextLongStringData
-      ...PageTypeListTextStringData
-      ...PageTypeListTextXHtmlStringData
-      ...PageTypeNumberFloatingPointData
-      ...PageTypeNumberIntegerData
-      ...PageTypeTextLongStringData
-      ...PageTypeTextStringData
-      ...PageTypeTextXHtmlStringData
-      ...SimplePageData
     }
   }
 }
@@ -2688,47 +1187,12 @@ ${BlockDataFragmentDoc}
 ${ElementDataFragmentDoc}
 ${IElementDataFragmentDoc}
 ${ArticleListElementDataFragmentDoc}
-${BlockTypeBlockSimpleBlockDataFragmentDoc}
-${SimpleBlockPropertyDataFragmentDoc}
-${BlockTypeChoiceDropDownListDataFragmentDoc}
-${BlockTypeChoiceSelectListDataFragmentDoc}
-${BlockTypeChoiceSelectedNotSelectedDataFragmentDoc}
-${BlockTypeContentContentAreaDataFragmentDoc}
-${IContentListItemFragmentDoc}
-${ImageMediaComponentDataFragmentDoc}
-${VideoMediaComponentDataFragmentDoc}
-${BlockTypeContentContentAreaItemDataFragmentDoc}
-${BlockTypeContentContentReferenceDataFragmentDoc}
-${BlockTypeDateTimeDataFragmentDoc}
-${BlockTypeGuidDataFragmentDoc}
-${BlockTypeLinkLinkCollectionDataFragmentDoc}
-${LinkItemDataFragmentDoc}
-${BlockTypeLinkLinkItemDataFragmentDoc}
-${BlockTypeLinkUrlToDocumentDataFragmentDoc}
-${BlockTypeLinkUrlToImageDataFragmentDoc}
-${BlockTypeLinkUrlToPageDataFragmentDoc}
-${BlockTypeListBlockSimpleBlockDataFragmentDoc}
-${BlockTypeListChoiceSelectedNotSelectedDataFragmentDoc}
-${BlockTypeListContentContentReferenceDataFragmentDoc}
-${BlockTypeListDateTimeDataFragmentDoc}
-${BlockTypeListGuidDataFragmentDoc}
-${BlockTypeListLinkLinkItemDataFragmentDoc}
-${BlockTypeListLinkUrlToDocumentDataFragmentDoc}
-${BlockTypeListLinkUrlToImageDataFragmentDoc}
-${BlockTypeListLinkUrlToPageDataFragmentDoc}
-${BlockTypeListNumberFloatingPointDataFragmentDoc}
-${BlockTypeListNumberIntegerDataFragmentDoc}
-${BlockTypeListTextLongStringDataFragmentDoc}
-${BlockTypeListTextStringDataFragmentDoc}
-${BlockTypeListTextXHtmlStringDataFragmentDoc}
-${BlockTypeNumberFloatingPointDataFragmentDoc}
-${BlockTypeNumberIntegerDataFragmentDoc}
-${BlockTypeTextLongStringDataFragmentDoc}
-${BlockTypeTextStringDataFragmentDoc}
-${BlockTypeTextXHtmlStringDataFragmentDoc}
 ${ButtonBlockDataFragmentDoc}
 ${CTAElementDataFragmentDoc}
 ${CarouselBlockDataFragmentDoc}
+${IContentListItemFragmentDoc}
+${ImageMediaComponentDataFragmentDoc}
+${VideoMediaComponentDataFragmentDoc}
 ${ContentRecsElementDataFragmentDoc}
 ${ContinueReadingComponentDataFragmentDoc}
 ${HeadingElementDataFragmentDoc}
@@ -2736,6 +1200,7 @@ ${HeroBlockDataFragmentDoc}
 ${ButtonBlockPropertyDataFragmentDoc}
 ${ImageElementDataFragmentDoc}
 ${LayoutSettingsBlockDataFragmentDoc}
+${LinkItemDataFragmentDoc}
 ${MegaMenuGroupBlockDataFragmentDoc}
 ${MenuNavigationBlockDataFragmentDoc}
 ${BlogPostPageMenuBlockFragmentDoc}
@@ -2744,85 +1209,17 @@ ${PageSeoSettingsDataFragmentDoc}
 ${ParagraphElementDataFragmentDoc}
 ${QuoteBlockDataFragmentDoc}
 ${RichTextElementDataFragmentDoc}
-${SimpleBlockDataFragmentDoc}
 ${TestimonialElementDataFragmentDoc}
 ${TextBlockDataFragmentDoc}
 ${VideoElementDataFragmentDoc}
 ${BlankSectionDataFragmentDoc}
 ${BlogSectionExperienceDataFragmentDoc}
-${ExpTypeBlockSimpleBlockDataFragmentDoc}
-${ExpTypeChoiceDropDownListDataFragmentDoc}
-${ExpTypeChoiceSelectListDataFragmentDoc}
-${ExpTypeChoiceSelectedNotSelectedDataFragmentDoc}
-${ExpTypeContentContentAreaDataFragmentDoc}
-${ExpTypeContentContentAreaItemDataFragmentDoc}
-${ExpTypeContentContentReferenceDataFragmentDoc}
-${ExpTypeDateTimeDataFragmentDoc}
-${ExpTypeGuidDataFragmentDoc}
-${ExpTypeLinkLinkCollectionDataFragmentDoc}
-${ExpTypeLinkLinkItemDataFragmentDoc}
-${ExpTypeLinkUrlToDocumentDataFragmentDoc}
-${ExpTypeLinkUrlToImageDataFragmentDoc}
-${ExpTypeLinkUrlToPageDataFragmentDoc}
-${ExpTypeListBlockSimpleBlockDataFragmentDoc}
-${ExpTypeListChoiceSelectedNotSelectedDataFragmentDoc}
-${ExpTypeListContentContentReferenceDataFragmentDoc}
-${ExpTypeListDateTimeDataFragmentDoc}
-${ExpTypeListGuidDataFragmentDoc}
-${ExpTypeListLinkLinkItemDataFragmentDoc}
-${ExpTypeListLinkUrlToDocumentDataFragmentDoc}
-${ExpTypeListLinkUrlToImageDataFragmentDoc}
-${ExpTypeListLinkUrlToPageDataFragmentDoc}
-${ExpTypeListNumberFloatingPointDataFragmentDoc}
-${ExpTypeListNumberIntegerDataFragmentDoc}
-${ExpTypeListTextLongStringDataFragmentDoc}
-${ExpTypeListTextStringDataFragmentDoc}
-${ExpTypeListTextXHtmlStringDataFragmentDoc}
-${ExpTypeNumberFloatingPointDataFragmentDoc}
-${ExpTypeNumberIntegerDataFragmentDoc}
-${ExpTypeTextLongStringDataFragmentDoc}
-${ExpTypeTextStringDataFragmentDoc}
-${ExpTypeTextXHtmlStringDataFragmentDoc}
-${SimpleExpDataFragmentDoc}
 ${BlogPostPageDataFragmentDoc}
-${LandingPageDataFragmentDoc}
-${PageTypeBlockSimpleBlockDataFragmentDoc}
-${PageTypeChoiceDropDownListDataFragmentDoc}
-${PageTypeChoiceSelectListDataFragmentDoc}
-${PageTypeChoiceSelectedNotSelectedDataFragmentDoc}
-${PageTypeContentContentAreaDataFragmentDoc}
-${PageTypeContentContentAreaItemDataFragmentDoc}
-${PageTypeContentContentReferenceDataFragmentDoc}
-${PageTypeDateTimeDataFragmentDoc}
-${PageTypeGuidDataFragmentDoc}
-${PageTypeLinkLinkCollectionDataFragmentDoc}
-${PageTypeLinkLinkItemDataFragmentDoc}
-${PageTypeLinkUrlToDocumentDataFragmentDoc}
-${PageTypeLinkUrlToImageDataFragmentDoc}
-${PageTypeLinkUrlToPageDataFragmentDoc}
-${PageTypeListBlockSimpleBlockDataFragmentDoc}
-${PageTypeListChoiceSelectedNotSelectedDataFragmentDoc}
-${PageTypeListContentContentReferenceDataFragmentDoc}
-${PageTypeListDateTimeDataFragmentDoc}
-${PageTypeListGuidDataFragmentDoc}
-${PageTypeListLinkLinkItemDataFragmentDoc}
-${PageTypeListLinkUrlToDocumentDataFragmentDoc}
-${PageTypeListLinkUrlToImageDataFragmentDoc}
-${PageTypeListLinkUrlToPageDataFragmentDoc}
-${PageTypeListNumberFloatingPointDataFragmentDoc}
-${PageTypeListNumberIntegerDataFragmentDoc}
-${PageTypeListTextLongStringDataFragmentDoc}
-${PageTypeListTextStringDataFragmentDoc}
-${PageTypeListTextXHtmlStringDataFragmentDoc}
-${PageTypeNumberFloatingPointDataFragmentDoc}
-${PageTypeNumberIntegerDataFragmentDoc}
-${PageTypeTextLongStringDataFragmentDoc}
-${PageTypeTextStringDataFragmentDoc}
-${PageTypeTextXHtmlStringDataFragmentDoc}
-${SimplePageDataFragmentDoc}`;
+${LandingPageDataFragmentDoc}`;
 export const getContentTypeDocument = gql`
-    query getContentType($key: String!, $version: String, $locale: [Locales!], $path: String, $domain: String) {
+    query getContentType($key: String!, $version: String, $locale: [Locales!], $path: String = "-", $domain: String) {
   content: _Content(
+    variation: {include: ALL}
     where: {_or: [{_metadata: {key: {eq: $key}, version: {eq: $version}}}, {_metadata: {url: {hierarchical: {eq: $path}, base: {eq: $domain}}, version: {eq: $version}}}]}
     locale: $locale
   ) {
@@ -2843,56 +1240,56 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getArticleListElementItems(variables: Schema.getArticleListElementItemsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getArticleListElementItemsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getArticleListElementItemsQuery>(getArticleListElementItemsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getArticleListElementItems', 'query', variables);
+    getArticleListElementItems(variables: Schema.getArticleListElementItemsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getArticleListElementItemsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getArticleListElementItemsQuery>({ document: getArticleListElementItemsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getArticleListElementItems', 'query', variables);
     },
-    getDefaultArticleList(variables?: Schema.getDefaultArticleListQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getDefaultArticleListQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getDefaultArticleListQuery>(getDefaultArticleListDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDefaultArticleList', 'query', variables);
+    getDefaultArticleList(variables?: Schema.getDefaultArticleListQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getDefaultArticleListQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getDefaultArticleListQuery>({ document: getDefaultArticleListDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getDefaultArticleList', 'query', variables);
     },
-    getSharedContinueReading(variables?: Schema.getSharedContinueReadingQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getSharedContinueReadingQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getSharedContinueReadingQuery>(getSharedContinueReadingDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getSharedContinueReading', 'query', variables);
+    getSharedContinueReading(variables?: Schema.getSharedContinueReadingQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getSharedContinueReadingQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getSharedContinueReadingQuery>({ document: getSharedContinueReadingDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getSharedContinueReading', 'query', variables);
     },
-    getBlankExperienceMetaData(variables: Schema.getBlankExperienceMetaDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getBlankExperienceMetaDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getBlankExperienceMetaDataQuery>(getBlankExperienceMetaDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getBlankExperienceMetaData', 'query', variables);
+    getBlankExperienceMetaData(variables: Schema.getBlankExperienceMetaDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getBlankExperienceMetaDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getBlankExperienceMetaDataQuery>({ document: getBlankExperienceMetaDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getBlankExperienceMetaData', 'query', variables);
     },
-    getChildBlogPosts(variables: Schema.getChildBlogPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getChildBlogPostsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getChildBlogPostsQuery>(getChildBlogPostsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getChildBlogPosts', 'query', variables);
+    getChildBlogPosts(variables: Schema.getChildBlogPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getChildBlogPostsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getChildBlogPostsQuery>({ document: getChildBlogPostsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getChildBlogPosts', 'query', variables);
     },
-    getBlogSectionExperienceMetaData(variables: Schema.getBlogSectionExperienceMetaDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getBlogSectionExperienceMetaDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getBlogSectionExperienceMetaDataQuery>(getBlogSectionExperienceMetaDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getBlogSectionExperienceMetaData', 'query', variables);
+    getBlogSectionExperienceMetaData(variables: Schema.getBlogSectionExperienceMetaDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getBlogSectionExperienceMetaDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getBlogSectionExperienceMetaDataQuery>({ document: getBlogSectionExperienceMetaDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getBlogSectionExperienceMetaData', 'query', variables);
     },
-    getBlogPostPageMetaData(variables: Schema.getBlogPostPageMetaDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getBlogPostPageMetaDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getBlogPostPageMetaDataQuery>(getBlogPostPageMetaDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getBlogPostPageMetaData', 'query', variables);
+    getBlogPostPageMetaData(variables: Schema.getBlogPostPageMetaDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getBlogPostPageMetaDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getBlogPostPageMetaDataQuery>({ document: getBlogPostPageMetaDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getBlogPostPageMetaData', 'query', variables);
     },
-    getLandingPageMetaData(variables: Schema.getLandingPageMetaDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getLandingPageMetaDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getLandingPageMetaDataQuery>(getLandingPageMetaDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getLandingPageMetaData', 'query', variables);
+    getLandingPageMetaData(variables: Schema.getLandingPageMetaDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getLandingPageMetaDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getLandingPageMetaDataQuery>({ document: getLandingPageMetaDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getLandingPageMetaData', 'query', variables);
     },
-    getFooterData(variables?: Schema.getFooterDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getFooterDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getFooterDataQuery>(getFooterDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getFooterData', 'query', variables);
+    getFooterData(variables?: Schema.getFooterDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getFooterDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getFooterDataQuery>({ document: getFooterDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getFooterData', 'query', variables);
     },
-    getHeaderData(variables?: Schema.getHeaderDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getHeaderDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getHeaderDataQuery>(getHeaderDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getHeaderData', 'query', variables);
+    getHeaderData(variables?: Schema.getHeaderDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getHeaderDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getHeaderDataQuery>({ document: getHeaderDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getHeaderData', 'query', variables);
     },
-    getLocales(variables?: Schema.getLocalesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getLocalesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getLocalesQuery>(getLocalesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getLocales', 'query', variables);
+    getLocales(variables?: Schema.getLocalesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getLocalesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getLocalesQuery>({ document: getLocalesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getLocales', 'query', variables);
     },
-    getArticles(variables?: Schema.getArticlesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getArticlesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getArticlesQuery>(getArticlesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getArticles', 'query', variables);
+    getArticles(variables?: Schema.getArticlesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getArticlesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getArticlesQuery>({ document: getArticlesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getArticles', 'query', variables);
     },
-    searchContent(variables: Schema.searchContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.searchContentQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.searchContentQuery>(searchContentDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchContent', 'query', variables);
+    searchContent(variables: Schema.searchContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.searchContentQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.searchContentQuery>({ document: searchContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'searchContent', 'query', variables);
     },
-    personalizedSearchContent(variables: Schema.personalizedSearchContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.personalizedSearchContentQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.personalizedSearchContentQuery>(personalizedSearchContentDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'personalizedSearchContent', 'query', variables);
+    personalizedSearchContent(variables: Schema.personalizedSearchContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.personalizedSearchContentQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.personalizedSearchContentQuery>({ document: personalizedSearchContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'personalizedSearchContent', 'query', variables);
     },
-    getContentById(variables: Schema.getContentByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getContentByIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getContentByIdQuery>(getContentByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getContentById', 'query', variables);
+    getContentById(variables: Schema.getContentByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getContentByIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getContentByIdQuery>({ document: getContentByIdDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getContentById', 'query', variables);
     },
-    getContentByPath(variables: Schema.getContentByPathQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getContentByPathQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getContentByPathQuery>(getContentByPathDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getContentByPath', 'query', variables);
+    getContentByPath(variables: Schema.getContentByPathQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getContentByPathQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getContentByPathQuery>({ document: getContentByPathDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getContentByPath', 'query', variables);
     },
-    getContentType(variables: Schema.getContentTypeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Schema.getContentTypeQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getContentTypeQuery>(getContentTypeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getContentType', 'query', variables);
+    getContentType(variables: Schema.getContentTypeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Schema.getContentTypeQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Schema.getContentTypeQuery>({ document: getContentTypeDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getContentType', 'query', variables);
     }
   };
 }
