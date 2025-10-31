@@ -1,4 +1,7 @@
 {
     "$schema": "https://openapi.vercel.sh/vercel.json",
-    "framework": "nextjs"
+    "framework": "nextjs",
+    "buildCommand": "yarn workspace remkoj-optimizely-fx-nextjs-cli prepare && yarn workspace frontend build:vercel",
+    "installCommand": "yarn install",
+    "outputDirectory": "apps/frontend/.next"
 }
