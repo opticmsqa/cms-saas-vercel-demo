@@ -17,7 +17,7 @@ const nextConfig = {
             // Optimizely CMS
             {
                 protocol: 'https',
-                hostname: '*.cms.optimizely.com',
+                hostname: '*.cmstest.optimizely.com',
                 pathname: '/**'
             },
             // Optimizely Content Recommendations
