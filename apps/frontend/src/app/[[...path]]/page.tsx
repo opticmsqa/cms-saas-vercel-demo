@@ -18,14 +18,24 @@ const {
     getContentByPath: getContentByPath,
 
     /**
-     * The demo site is single language, so we're always defaulting to English.
-     * For a multi-lingual implementation, you may omit this parameters when you
-     * have both a [lang] URL segment and define the channel. Otherwise implement
-     * your own synchronous logic to get the initial locale based on the parameters.
+     * Extract locale from the URL path. If the first segment looks like a locale
+     * code (2-letter language code, optionally with country code), use it. 
+     * Otherwise default to English.
      * 
-     * @returns     The initial locale
+     * @param params The route parameters
+     * @returns The initial locale
      */
-    paramsToLocale: () => "en",
+    paramsToLocale: (params: { path?: string[] }) => {
+        // If path exists and first segment looks like a locale (e.g., 'en', 'sv', 'en-US')
+        if (params.path && params.path.length > 0) {
+            const firstSegment = params.path[0];
+            // Check if it matches locale pattern (2-letter code, optionally with -XX)
+            if (/^[a-z]{2}(-[A-Z]{2})?$/i.test(firstSegment)) {
+                return firstSegment;
+            }
+        }
+        return "en";
+    },
 
     /**
      * The factory to use to create the GraphQL Client to fetch data from Optimizely
