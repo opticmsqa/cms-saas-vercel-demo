@@ -28,8 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: base,
     title: {
-      default: `Mosey Bank - An Optimizely Demo Company`,
-      template: `%s | Mosey Bank - An Optimizely Demo Company`,
+      default: `Mosey Bank 5.1.7 - An Optimizely Demo Company`,
+      template: `%s | Mosey Bank 5.1.7  - An Optimizely Demo Company`,
     },
     openGraph: {
       title: {
